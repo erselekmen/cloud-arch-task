@@ -1,0 +1,10 @@
+namespace: cloud-arch-task
+environment: dev
+
+region: "eu-central-1"
+account_id: "392591831316"
+
+tags:
+  Namespace: cloud-arch-task
+  Environment: dev
+  Terraform: true
