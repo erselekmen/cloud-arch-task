@@ -26,10 +26,9 @@ inputs = {
   ami                          = local.ami
   instance_type                = local.instance_type
   monitoring                   = true
-  vpc_security_group_ids       = [dependency.sg_ec2_applier.outputs.this_security_group_id]
+  vpc_security_group_ids       = [dependency.sg_ec2.outputs.this_security_group_id]
   subnet_id                    = dependency.vpc.outputs.public_subnets[0]
   associate_public_ip_address  = true
-#  iam_instance_profile         = dependency.iam_roles_ec2_applier.outputs.iam_instance_profile_name
 
   root_block_device = [{
     volume_size = local.volume_size
@@ -47,9 +46,5 @@ dependency "vpc" {
 }
 
 dependency "sg_ec2" {
-  config_path = "${local.root_dir}/sg/ec2/applier"
+  config_path = "${local.root_dir}/sg/ec2"
 }
-
-/* dependency "iam_roles_ec2_applier" {
-  config_path = "${local.root_dir}/iam/roles/ec2/applier"
-} */
