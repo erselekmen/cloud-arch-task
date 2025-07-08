@@ -15,7 +15,7 @@ remote_state {
     if_exists = "overwrite_terragrunt"
   }
   config = {
-    bucket  = "eks-grpc-infrastructure"
+    bucket  = "cloud-task-infra"
     key     = "${path_relative_to_include()}/terraform.tfstate"
     region  = "eu-central-1"
     encrypt = true
