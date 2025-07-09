@@ -5,7 +5,7 @@ resource "aws_eip" "this" {
 }
 
 ##################################
-# EC2 Instance (on‑demand)       #
+# EC2 Instance       
 ##################################
 resource "aws_instance" "this" {
   count = var.create && !var.create_spot_instance ? var.instance_count : 0
@@ -24,7 +24,7 @@ resource "aws_instance" "this" {
   private_ip                  = var.private_ip
 
   #######################
-  # Root volume options #
+  # Root volume options 
   #######################
   dynamic "root_block_device" {
     for_each = var.root_block_device

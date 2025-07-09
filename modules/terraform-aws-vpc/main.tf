@@ -1,5 +1,5 @@
 #############################
-# Locals (only what we need)
+# Locals
 #############################
 locals {
   vpc_id = element(concat(aws_vpc.this.*.id, [""]), 0)
@@ -37,7 +37,7 @@ resource "aws_internet_gateway" "this" {
 }
 
 ####################
-# Public Subnet(s)
+# Public Subnets
 ####################
 resource "aws_subnet" "public" {
   count = var.create_vpc && length(var.public_subnets) > 0 ? length(var.public_subnets) : 0
@@ -78,7 +78,7 @@ resource "aws_route" "public_internet_gateway" {
 }
 
 #####################################
-# Subnet  Route‑table Association
+# Subnet  Route & table Association
 #####################################
 resource "aws_route_table_association" "public" {
   count          = var.create_vpc && length(var.public_subnets) > 0 ? length(var.public_subnets) : 0
