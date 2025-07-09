@@ -35,7 +35,7 @@ resource "aws_security_group" "this_name_prefix" {
 }
 
 ##########################################
-# Ingress Rules (CIDR‑based only)
+# Ingress Rules
 ##########################################
 
 resource "aws_security_group_rule" "ingress_with_cidr_blocks" {
@@ -50,7 +50,7 @@ resource "aws_security_group_rule" "ingress_with_cidr_blocks" {
 }
 
 ##########################################
-# Egress Rules (CIDR‑based only)
+# Egress Rules 
 ##########################################
 
 resource "aws_security_group_rule" "egress_with_cidr_blocks" {
