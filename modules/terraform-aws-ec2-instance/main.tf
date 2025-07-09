@@ -16,7 +16,6 @@ resource "aws_instance" "this" {
   user_data         = var.user_data
   user_data_base64  = var.user_data_base64
   monitoring        = var.monitoring
-  hibernation       = var.hibernation
   iam_instance_profile = var.iam_instance_profile
 
   subnet_id              = length(var.subnet_ids) > 0 ? var.subnet_ids[count.index % length(var.subnet_ids)] : var.subnet_id
@@ -40,26 +39,6 @@ resource "aws_instance" "this" {
       tags                  = lookup(root_block_device.value, "tags", null)
     }
   }
-
-  ##################################
-  # Misc instance‑level attributes #
-  ##################################
-  ebs_optimized = var.ebs_optimized
-
-  credit_specification {
-    cpu_credits = var.cpu_credits
-  }
-
-  enclave_options { enabled = var.enclave_options_enabled }
-
-  metadata_options {
-    http_endpoint               = "enabled"
-    http_tokens                 = "required"
-    http_put_response_hop_limit = 2
-  }
-
-  tags        = merge({ Name = var.instance_count > 1 ? "${var.name}-${format("%02d", count.index + 1)}" : var.name }, var.tags)
-  volume_tags = var.enable_volume_tags ? merge({ Name = var.instance_count > 1 ? "${var.name}-${format("%02d", count.index + 1)}" : var.name }, var.volume_tags) : null
 }
 
 #################################

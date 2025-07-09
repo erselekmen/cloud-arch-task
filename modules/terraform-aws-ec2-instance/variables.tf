@@ -100,40 +100,10 @@ variable "monitoring" {
   default     = false
 }
 
-variable "hibernation" {
-  description = "Enable hibernation for the instance"
-  type        = bool
-  default     = null
-}
-
-variable "ebs_optimized" {
-  description = "Launch instance as EBS optimized"
-  type        = bool
-  default     = null
-}
-
 variable "root_block_device" {
   description = "Configuration for the root block device"
   type        = list(any)
   default     = []
-}
-
-variable "cpu_credits" {
-  description = "T3/T4 CPU credit specification (standard or unlimited)"
-  type        = string
-  default     = null
-}
-
-variable "enclave_options_enabled" {
-  description = "Whether Nitro Enclaves should be enabled"
-  type        = bool
-  default     = null
-}
-
-variable "get_password_data" {
-  description = "Retrieve Windows password data"
-  type        = bool
-  default     = null
 }
 
 variable "metadata_options" {
