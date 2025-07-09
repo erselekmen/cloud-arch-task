@@ -23,3 +23,14 @@ remote_state {
     profile = "ersel-local"
   }
 }
+
+# In order to delete terragrunt_cache files to resolve plugin errors on local
+terraform {
+  after_hook "terragrunt_cache_clean" {
+    commands = ["apply", "destroy"]
+    execute = [
+      "bash", "-c",
+      "rm -rf \"${get_terragrunt_dir()}/.terragrunt-cache\" && echo \".terragrunt-cache cleaned for ${get_terragrunt_dir()}\""
+    ]
+  }
+}
