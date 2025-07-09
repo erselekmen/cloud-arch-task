@@ -18,23 +18,21 @@ inputs = {
   description = "Security group for EC2 with ingress from static IP and egress to internet"
   vpc_id      = dependency.vpc.outputs.vpc_id
 
-  ingress_rules = [
+  ingress_with_cidr_blocks = [
     {
       description = "Allow SSH from static IP"
       from_port   = 22
       to_port     = 22
       protocol    = "tcp"
-      cidr_blocks = [local.source_ip]
+      cidr_blocks = local.source_ip
     }
   ]
 
-  egress_rules = [
+  egress_with_cidr_blocks = [
     {
-      description = "Allow all outbound"
-      from_port   = 0
-      to_port     = 0
-      protocol    = "-1"
-      cidr_blocks = ["0.0.0.0/0"]
+      rule        = "all-all"
+      cidr_blocks = "0.0.0.0/0"
+      description = "Allow all outbound connections"
     }
   ]
 
