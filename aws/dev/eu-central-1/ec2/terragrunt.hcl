@@ -46,7 +46,7 @@ inputs = {
     #!/bin/bash
     useradd -m -s /bin/bash ipercept
     mkdir -p /home/ipercept/.ssh
-    echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMBt89Sx7ukQX3b8O5U0yw7DRnkV0GQv1dC1vbrJEYKU" > /home/ipercept/.ssh/authorized_keys
+    echo "ssh-ed25519 your_pub_key_here" > /home/ipercept/.ssh/authorized_keys
     chown -R ipercept:ipercept /home/ipercept/.ssh
     chmod 700 /home/ipercept/.ssh
     chmod 600 /home/ipercept/.ssh/authorized_keys
