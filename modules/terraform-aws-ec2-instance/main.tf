@@ -1,9 +1,5 @@
-########################
-# Optional Elastic  IP #
-########################
 resource "aws_eip" "this" {
   count = var.allocate_eip ? 1 : 0
-  vpc   = true
 
   tags = merge({ Name = var.name }, var.tags)
 }
