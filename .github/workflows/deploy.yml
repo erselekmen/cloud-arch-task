@@ -1,0 +1,34 @@
+name: IPercept web-app deployment
+
+on:
+  push:
+    branches: [dev]
+
+permissions:
+  id-token: write
+  contents: read
+
+environment: dev
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::643321508879:role/github-actions-ecr-pusher
+          aws-region: eu-central-1
+
+      - name: Login to Amazon ECR
+        run: |
+          aws ecr get-login-password | docker login --username AWS --password-stdin 643321508879.dkr.ecr.eu-central-1.amazonaws.com
+
+      - name: Build, tag, and push image
+        run: |
+          docker build -t webapp .
+          docker tag webapp:latest 643321508879.dkr.ecr.eu-central-1.amazonaws.com/webapp:latest
+          docker push 643321508879.dkr.ecr.eu-central-1.amazonaws.com/webapp:latest
