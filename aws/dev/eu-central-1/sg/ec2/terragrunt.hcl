@@ -25,6 +25,13 @@ inputs = {
       to_port     = 22
       protocol    = "tcp"
       cidr_blocks = local.source_ip
+    },
+    {
+      description = "Allow HTTP Requests from the static IP"
+      from_port   = 80
+      to_port     = 80
+      protocol    = "tcp"
+      cidr_blocks = local.source_ip
     }
   ]
 
